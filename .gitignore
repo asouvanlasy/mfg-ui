@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+*.tgz
+*.zip
+*.7z
+*.log
+*.pex
+*.pas
