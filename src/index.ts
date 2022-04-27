@@ -1,15 +1,35 @@
-import { Debug, once, on, printConsole, Input } from 'skyrimPlatform'
+import { once, on, printConsole, Input, browser } from 'skyrimPlatform'
 import * as sp from 'skyrimPlatform'
-// import * as pu from '@skyrim-platform/papyrus-util/MiscUtil'
-import * as cu from '@skyrim-platform/console-util'
+import { ExecuteCommand } from '@skyrim-platform/console-util'
 
+browser.loadUrl('file:///Data/Platform/UI/index.html')
+
+// This event runs when this plugin is compiled
 once('tick', () => {
-    printConsole('Hello! You can view this in the Skyrim ~ console on the Main Menu when the game runs')
+    browser.setVisible(false)
+    browser.setFocused(false)
+    printConsole('SP Hot Refresh')
 })
 
+// This event runs when any button is pressed
+on('buttonEvent', (event) => {
+    if (Input.isKeyPressed(2)) {
+        printConsole('opening browser')
+        browser.setVisible(true)
+        browser.setFocused(true)
+    }
+})
 
+// This event runs when it the HTML button is pressed
+on('browserMessage', (event) => {
+    let command = event.arguments
 
-once('update', () => {
-    printConsole('setting mfg...')
-    cu.ExecuteCommand('mfg expression 2 100')
+    on('buttonEvent', (event) => {
+        if (Input.isKeyPressed(3)) {
+            printConsole('executing command: ' + command)
+            browser.setVisible(false)
+            browser.setFocused(false)
+            ExecuteCommand(command + '')
+        }
+    })
 })

@@ -26,6 +26,6 @@
   ],
   "dependencies": {
     "@skyrim-platform/console-util": "^1.3.3",
-    "@skyrim-platform/skyrim-platform": "^2.3.0"
+    "@skyrim-platform/skyrim-platform": "^2.6.0"
   }
 }
